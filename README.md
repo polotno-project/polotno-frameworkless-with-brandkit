@@ -14,20 +14,46 @@ Run the project:
 npm run dev
 ```
 
-You can make any edits you like. The brand kit feature is inside `/components/side-panel/brand-kit/` dirrectory.
-You can freely modify this component for your own brand and style requiremenents.
+You can make any edits you like. The brand kit feature is inside `/components/side-panel/brand-kit/` directory.
+You can freely modify this component for your own brand and style requirements.
+
+### Customizing the API
+
 All communication with API is inside `/components/side-panel/brand-kit/api-context.ts` file.
-For the demo it is using local IndexedDB, you should replace function to communicate with your own server instead.
+For the demo it is using local IndexedDB. To connect to your own server, replace the `apiFetch()` function with real fetch calls to your backend API.
+
+Example of replacing with a real API:
+
+```typescript
+async function apiFetch<T = any>(options: ApiFetchOptions): Promise<T> {
+  const { path, method, body, params } = options;
+
+  const url = new URL(`https://your-api.com${path}`);
+  if (params) {
+    Object.entries(params).forEach(([key, val]) =>
+      url.searchParams.append(key, String(val))
+    );
+  }
+
+  const response = await fetch(url.toString(), {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  return response.json();
+}
+```
 
 ## Build
 
-To finilize the editor and insert into your web app:
+To finalize the editor and insert into your web app:
 
 ```bash
 npm run build
 ```
 
-The result output will be inside `./dist/editor.js`. But that file somewhere in your public server. Usage on the page:
+The build output will be in `./dist/editor.js`. Deploy this file to your server and include it in your HTML page:
 
 ```html
 <!-- add styles -->
