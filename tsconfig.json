@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015", "es2017", "dom"],
+    "target": "ES2017",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "strictNullChecks": false,
+    "declaration": true,
+    "moduleResolution": "Node",
+    "skipLibCheck": true
+  },
+  "include": ["./editor/**/*.ts", "./editor/**/*.tsx", "./src/**/*.ts", "./src/**/*.tsx"]
+}
+  
