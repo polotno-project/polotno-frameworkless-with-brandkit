@@ -13,6 +13,9 @@ import { setTranslations } from 'polotno/config';
 
 setTranslations(
   {
+    sidePanel: {
+      brandKit: 'Brand Kit',
+    },
     brandKit: {
       colors: 'Colors',
       fonts: 'Fonts',
@@ -60,7 +63,7 @@ setTranslations(
     },
   },
   {
-    validate: true, // you can set it to false, if you don't need to check if all labels are translated
+    validate: false, // you can set it to false, if you don't need to check if all labels are translated
   }
 );
 
@@ -93,7 +96,7 @@ const BrandKitPanel = ({ store }: BrandKitPanelProps) => {
 
 export const BrandKitSection = {
   name: 'brand-kit',
-  Tab: (props) => (
+  Tab: (props: any) => (
     <SectionTab name={t('sidePanel.brandKit')} {...props}>
       <Icon icon={<Style />} />
     </SectionTab>

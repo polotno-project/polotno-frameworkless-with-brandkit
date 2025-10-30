@@ -2,29 +2,30 @@ import React from 'react';
 import { Alert, Button, Dialog, InputGroup, Intent } from '@blueprintjs/core';
 import styled from 'polotno/utils/styled';
 import { t } from 'polotno/utils/l10n';
-import { Search } from '@blueprintjs/icons';
+import { Search, Plus } from '@blueprintjs/icons';
 
 // Shared styled components
 export const HeaderContainer = styled('div')`
-    display: block;
-    padding: 10px;
-    border-bottom: 1px solid #e1e8ed;
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #e1e8ed;
 `;
 
 // Shared components
 interface BrandKitHeaderProps {
   onAddClick: () => void;
   addButtonText: string;
-  addIcon?: string;
+  addIcon?: React.ReactElement;
   onSearch: (query: string) => void;
 }
 
 export const BrandKitHeader: React.FC<BrandKitHeaderProps> = ({
   onAddClick,
   addButtonText,
-  addIcon = "plus",
-  onSearch
-}) => {return (
+  addIcon = <Plus />,
+  onSearch,
+}) => {
+  return (
     <HeaderContainer>
       <InputGroup
         leftIcon={<Search />}
@@ -35,12 +36,7 @@ export const BrandKitHeader: React.FC<BrandKitHeaderProps> = ({
           marginBottom: '20px',
         }}
       />
-      <Button
-        icon={addIcon}
-        intent={Intent.PRIMARY}
-        onClick={onAddClick}
-        small
-      >
+      <Button icon={addIcon} intent={Intent.PRIMARY} onClick={onAddClick} small>
         {addButtonText}
       </Button>
     </HeaderContainer>
@@ -60,7 +56,7 @@ export const BrandKitModal: React.FC<BrandKitModalProps> = ({
   onClose,
   title,
   children,
-  width = 'auto'
+  width = 'auto',
 }) => {
   return (
     <Dialog
@@ -70,9 +66,7 @@ export const BrandKitModal: React.FC<BrandKitModalProps> = ({
       canOutsideClickClose={false}
       style={{ width }}
     >
-      <div style={{ padding: '20px' }}>
-        {children}
-      </div>
+      <div style={{ padding: '20px' }}>{children}</div>
     </Dialog>
   );
 };
@@ -92,7 +86,7 @@ export const BrandKitDeleteAlert: React.FC<BrandKitDeleteAlertProps> = ({
   onConfirm,
   itemName,
   confirmationMessage,
-  loading = false
+  loading = false,
 }) => {
   return (
     <Alert
@@ -122,13 +116,18 @@ export const BrandKitModalActions: React.FC<BrandKitModalActionsProps> = ({
   onSave,
   isLoading = false,
   isEditing = false,
-  saveDisabled = false
+  saveDisabled = false,
 }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
-      <Button onClick={onCancel}>
-        {t('brandKit.cancel')}
-      </Button>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '10px',
+        marginTop: '20px',
+      }}
+    >
+      <Button onClick={onCancel}>{t('brandKit.cancel')}</Button>
       <Button
         intent={Intent.PRIMARY}
         onClick={onSave}
